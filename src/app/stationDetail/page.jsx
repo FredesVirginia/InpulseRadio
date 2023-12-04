@@ -31,6 +31,12 @@ export default function StationDetail (){
     fetchStationData();
   }, [stationName]);
 
+
+  const cleanName = (rawName) => {
+    // Utiliza una expresión regular para eliminar caracteres no deseados
+    return rawName.replace(/[^a-zA-Z ]/g, '');
+  };
+
   console.log("El stado local de stations es " , localData.length)
     return (
         <div className="bg-red-600">
@@ -39,7 +45,7 @@ export default function StationDetail (){
         // Renderiza solo si hay elementos en first200Objects
         localData.map((item, index) => (
           <div key={index}>
-            <p>{item.name}</p>
+            <p>{cleanName(item.name)}</p>
             {/* Agrega más campos según la estructura de tus objetos */}
           </div>
         ))
