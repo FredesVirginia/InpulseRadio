@@ -1,7 +1,30 @@
 //Esta es una funcionalidad de tantas funcionalidades
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+const loadState = () => {
+    try {
+      const serializedState = localStorage.getItem("stationReducer");
+      if (serializedState === null) {
+        return undefined;
+      }
+      return JSON.parse(serializedState);
+    } catch (err) {
+      return undefined;
+    }
+  };
+  
+  const saveState = (state) => {
+    try {
+      const serializedState = JSON.stringify(state);
+      localStorage.setItem("stationReducer", serializedState);
+    } catch (err) {
+      // Handle errors
+    }
+  };
+
+
+
+const initialState = loadState() || {
    nameStation: ""
 }
 
@@ -13,7 +36,7 @@ export const stationSlice = createSlice({
         changeName : (state , action) =>{
             console.log("El action payload en el stationSlice " , action.payload);
            state.nameStation = action.payload
-
+           saveState(state);
         } 
     }
 })
