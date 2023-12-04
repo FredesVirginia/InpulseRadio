@@ -1,0 +1,20 @@
+http://de1.api.radio-browser.info/json/stations/byname/jazz
+
+Ess es un ejemplo de usqueda por nombre de tipo de musica
+http://de1.api.radio-browser.info/json/stations/byname/rock
+http://de1.api.radio-browser.info/json/stations/byname/jazz
+http://de1.api.radio-browser.info/json/stations/byname/hip-hop
+http://de1.api.radio-browser.info/json/stations/byname/R&B
+http://de1.api.radio-browser.info/json/stations/byname/country
+http://de1.api.radio-browser.info/json/stations/byname/reggae
+http://de1.api.radio-browser.info/json/stations/byname/electronica
+http://de1.api.radio-browser.info/json/stations/byname/blues
+http://de1.api.radio-browser.info/json/stations/byname/clasica
+http://de1.api.radio-browser.info/json/stations/byname/indie
+http://de1.api.radio-browser.info/json/stations/byname/metal
+http://de1.api.radio-browser.info/json/stations/byname/folk
+http://de1.api.radio-browser.info/json/stations/byname/punk
+http://de1.api.radio-browser.info/json/stations/byname/soul
+http://de1.api.radio-browser.info/json/stations/byname/funk
+http://de1.api.radio-browser.info/json/stations/byname/salsa
+http://de1.api.radio-browser.info/json/stations/byname/disco
