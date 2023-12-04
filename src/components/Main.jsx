@@ -1,10 +1,42 @@
+"use client"
 import { stationRadioInfo  }from "@/helpers/stationRadioInfo";
 import Nav from "./Nav";
 import Image from "next/image" ; 
+import { useDispatch } from 'react-redux';
 import Link from 'next/link';
+import { useState } from "react";
+import { useEffect } from "react";
+import { changeName } from "@/Redux/stationSlice";
+
 export default function  Main ({ handleSignOut, currentPage, divsPerPage, totalPages, handleClickPrev, handleClickNext }) {
     const currentDivsData = stationRadioInfo.slice((currentPage - 1) * divsPerPage, currentPage * divsPerPage);
+    const dispatch = useDispatch();
+    const [station , setStation] = useState("");
+
+    const handleClik = (nameLink) => {
+      console.log("EL name link en el handle clik es ", nameLink);
+      setStation(nameLink);
+    
+        
+    };
+
+    useEffect(() => {
+      // Este efecto se ejecutará cada vez que station se actualice
+      console.log("El station state es ", station);
   
+      try {
+        dispatch(changeName(station));
+        console.log("La station en el main es ", station);
+      } catch (error) {
+        console.log("El error en el dispatch de station name", error);
+      }
+    }, [station]);
+    
+    
+
+    
+
+
     return (
         <div className="   h-screen  ">
         
@@ -28,7 +60,16 @@ export default function  Main ({ handleSignOut, currentPage, divsPerPage, totalP
                
                >{div.name}</h3>
                <div className="text-center p-2 bg-sky-600">
-               <Link className=' animate-pulse text-white font-bold text-2xl ' href={div.link}>Listen</Link>
+             
+            
+               <Link
+                      href={`/stationDetail`}
+                      onClick={() => handleClik(div.link)}
+                    >
+                      Listen
+                    </Link>
+
+           
                </div>
             </div>
           ))}

@@ -1,5 +1,5 @@
 export const stationRadioInfo = [
-    { id : 1 , name : "Rock Station " , img: "/Img/rock3.jpg" , link: "http://de1.api.radio-browser.info/json/stations/byname/rock"},
+    { id : 1 , name : "Rock Station " , img: "/Img/rock3.jpg" , link: "rock"},
     { id : 2 , name : "Jazz Station " , img: "/Img/jazz2.jpg" , link: "http://de1.api.radio-browser.info/json/stations/byname/jazz"},
     { id : 3 , name : "Hip Hop Station " , img: "/Img/hiphop.jpg" , link: "http://de1.api.radio-browser.info/json/stations/byname/hip-hop"},
     { id : 4 , name : "R&B Station " , img: "/Img/r&b.jpeg" , link: "http://de1.api.radio-browser.info/json/stations/byname/R&B" },

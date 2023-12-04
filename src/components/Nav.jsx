@@ -45,10 +45,7 @@ export default function Nav (){
             <div className="flex justify-between pt-5">
                 <h2 className="  text-white text-6xl font-extrabold"
                      >LISTEN ONLINE</h2>
-               <select className="h-10 px-3 bg-gray-400">
-                    <option selected disabled>Seleccionar disco</option>
-                   
-               </select>
+               
             </div>
         </div>
     )
