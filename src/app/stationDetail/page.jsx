@@ -7,7 +7,8 @@ import Link from "next/link";
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { FaPlayCircle } from "react-icons/fa";
-
+import { FaCirclePause } from "react-icons/fa6";
+import { recoverRadio } from "@/helpers/recoverRadio";
 
 
 export default function StationDetail (){
@@ -21,11 +22,7 @@ export default function StationDetail (){
   useEffect(() => {
     const fetchStationData = async () => {
       try {
-        const response = await fetch(`https://de1.api.radio-browser.info/json/stations/byname/${stationName}`);
-        const data = await response.json();
-        console.log("LA data del fecht es ", data.length);
-        // Actualiza el estado local con los datos obtenidos de la API
-        const first200Data = data.filter((item, index) => index < 200);
+        const first200Data = await recoverRadio(stationName);
 
         // Actualiza el estado local con los primeros 200 datos obtenidos de la API
         setLocalData(first200Data);
@@ -63,17 +60,39 @@ export default function StationDetail (){
 
   console.log("El stado local de stations es " , localData.length)
     return (
-        <div className="">
-           <Nav className="bg-blue-400"/>
-           {localData.length > 0 ? (
+        <div className="pt-10"  
+        style={{
+          backgroundImage: 'url("./Img/playa.jpg")',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center center',
+          backgroundAttachment: 'fixed',
+          backgroundSize: 'cover',
+          height: '100vh',
+          position: 'relative', // Añadir posición relativa
+          overflowY: 'scroll',  // Agregar desplazamiento vertical
+        }}
+        >
+           <Nav />
+           <div className="flex justify-center"> 
+             <div className="grid grid-cols-2  gap-4 p-4 ">
+             {localData.length > 0 ? (
         // Renderiza solo si hay elementos en first200Objects
         localData.map((item, index) => (
-          <div key={index} className="bg-blue-800 m-10">
-            <p> NOMBRE : {cleanName(item.name)} <FaPlayCircle  onClick={() => playRadio(item)}/> </p>
-            <button onClick={stopRadio}>Detener</button>
-            <p> Home Page <Link href={item.homepage}> Visitar </Link> </p>
-            <p> PAIS : {item.country}</p>
-            <p>VOTES : {item.votes}</p>
+          <div key={index} className=" relative flex flex-col w-[350px] h-[280px] space-y-12 p-10 bg-gradient-to-b from-color7 to-color8 m-10">
+           
+            <p className="text-2xl   font-bold text-white truncate">  {cleanName(item.name)}  </p>
+           
+
+             <div className="absolute bottom-0 pb-10 space-y-2 text-white ">
+              
+                  <p> Home Page <Link href={item.homepage}> Visitar </Link> </p>
+                  <p className="truncate"> PAIS : {item.country}</p>
+                  <div className="flex space-x-12  w-[250px] "> 
+                        <p>VOTES : {item.votes}</p>
+                        <FaPlayCircle className="text-2xl" onClick={() => playRadio(item)}/>
+                        <FaCirclePause className="text-2xl" onClick={ stopRadio}/>
+                  </div>
+               </div>
             {/* Agrega más campos según la estructura de tus objetos */}
           </div>
         ))
@@ -83,6 +102,8 @@ export default function StationDetail (){
 
         <p>Cargando</p>
       )}
+             </div>
+           </div>
         </div>
     )
 }
