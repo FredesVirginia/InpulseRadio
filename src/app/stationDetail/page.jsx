@@ -10,11 +10,25 @@ import { FaPlayCircle } from "react-icons/fa";
 import { FaCirclePause } from "react-icons/fa6";
 import { recoverRadio } from "@/helpers/recoverRadio";
 import { MdFavorite } from "react-icons/md";                                                                               
+import { v4 as uuidv4} from  "uuid"
 
 export default function StationDetail (){
   const [localData, setLocalData] = useState([]);
   const [audioRef, setAudioRef] = useState(null);
+  const  [favorito , setFavorito] = useState({
+    id : uuidv4(),
+    name : "",
+    country : "",
+    votes: 0,
+    url: ""
+  });
 
+  const [ station , setStation] = useState({
+    name : "",
+    country : "",
+    votes: 0,
+    url: ""
+  });
   const stationName = useSelector((state) => state.stationReducer.nameStation);
   console.log("El REDUCER EN EL STATIONDEDAITL  ES ", stationName);
 
@@ -58,6 +72,21 @@ export default function StationDetail (){
     }
   };
 
+  const addFavorito = (station) =>{
+      console.log("Hiciste click");
+      console.log("La radion es " , station);
+      setFavorito({
+        name: station.name,
+        country : station.country,
+        votes : station.votes,
+        url : station.url
+      });
+
+
+  }
+
+  console.log("El favorito es " , favorito);
+
   console.log("El stado local de stations es " , localData.length)
     return (
         <div className="pt-10"  
@@ -89,10 +118,10 @@ export default function StationDetail (){
                   <p className="truncate"> COUNTRY : {item.country}</p>
                   <div className="flex space-x-8  w-[250px] "> 
                   <p>  <Link  className="underline " href={item.homepage}> Fan Page </Link> </p>
-                        
+                                                                                          
                         <FaPlayCircle className="text-2xl" onClick={() => playRadio(item)}/>
                         <FaCirclePause className="text-2xl" onClick={ stopRadio}/>
-                        <MdFavorite className="text-2xl" />
+                        <MdFavorite  onClick={()=>addFavorito(item)} className="text-2xl" />
                   </div>
                </div>
             {/* Agrega más campos según la estructura de tus objetos */}
