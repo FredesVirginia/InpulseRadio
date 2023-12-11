@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 import { FaPlayCircle } from "react-icons/fa";
 import { FaCirclePause } from "react-icons/fa6";
 import { recoverRadio } from "@/helpers/recoverRadio";
-
+import { MdFavorite } from "react-icons/md";                                                                               
 
 export default function StationDetail (){
   const [localData, setLocalData] = useState([]);
@@ -78,19 +78,21 @@ export default function StationDetail (){
              {localData.length > 0 ? (
         // Renderiza solo si hay elementos en first200Objects
         localData.map((item, index) => (
-          <div key={index} className=" relative flex flex-col w-[350px] h-[280px] space-y-12 p-10 bg-gradient-to-b from-color7 to-color8 m-10">
+          <div key={index} className=" relative flex flex-col w-[380px] h-[280px] space-y-12 p-12 bg-gradient-to-b from-color7 to-color8 m-10">
            
             <p className="text-2xl   font-bold text-white truncate">  {cleanName(item.name)}  </p>
-           
+            
 
              <div className="absolute bottom-0 pb-10 space-y-2 text-white ">
               
-                  <p> Home Page <Link href={item.homepage}> Visitar </Link> </p>
-                  <p className="truncate"> PAIS : {item.country}</p>
-                  <div className="flex space-x-12  w-[250px] "> 
-                        <p>VOTES : {item.votes}</p>
+             <p>VOTES : {item.votes}</p>
+                  <p className="truncate"> COUNTRY : {item.country}</p>
+                  <div className="flex space-x-8  w-[250px] "> 
+                  <p>  <Link  className="underline " href={item.homepage}> Fan Page </Link> </p>
+                        
                         <FaPlayCircle className="text-2xl" onClick={() => playRadio(item)}/>
                         <FaCirclePause className="text-2xl" onClick={ stopRadio}/>
+                        <MdFavorite className="text-2xl" />
                   </div>
                </div>
             {/* Agrega más campos según la estructura de tus objetos */}
