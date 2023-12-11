@@ -3,11 +3,16 @@
 import StationDetailC from "@/components/StationDetailC";
 import { useRouter } from 'next/navigation';
 import Nav from "@/components/Nav";
+import Link from "next/link";
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { FaPlayCircle } from "react-icons/fa";
+
+
 
 export default function StationDetail (){
   const [localData, setLocalData] = useState([]);
+  const [audioRef, setAudioRef] = useState(null);
 
   const stationName = useSelector((state) => state.stationReducer.nameStation);
   console.log("El REDUCER EN EL STATIONDEDAITL  ES ", stationName);
@@ -37,15 +42,38 @@ export default function StationDetail (){
     return rawName.replace(/[^a-zA-Z ]/g, '');
   };
 
+  const playRadio = (radio) =>{
+      // Si ya hay una instancia de Audio, pausarla antes de crear una nueva
+    if (audioRef) {
+      audioRef.pause();
+    }
+
+    const newAudio = new Audio(radio.url);
+    newAudio.play();
+    setAudioRef(newAudio);
+  }
+
+
+  const stopRadio = () => {
+    if (audioRef) {
+      audioRef.pause();
+      audioRef.currentTime = 0; // Reinicia la reproducción al principio
+    }
+  };
+
   console.log("El stado local de stations es " , localData.length)
     return (
-        <div className="bg-red-600">
+        <div className="">
            <Nav className="bg-blue-400"/>
            {localData.length > 0 ? (
         // Renderiza solo si hay elementos en first200Objects
         localData.map((item, index) => (
-          <div key={index}>
-            <p>{cleanName(item.name)}</p>
+          <div key={index} className="bg-blue-800 m-10">
+            <p> NOMBRE : {cleanName(item.name)} <FaPlayCircle  onClick={() => playRadio(item)}/> </p>
+            <button onClick={stopRadio}>Detener</button>
+            <p> Home Page <Link href={item.homepage}> Visitar </Link> </p>
+            <p> PAIS : {item.country}</p>
+            <p>VOTES : {item.votes}</p>
             {/* Agrega más campos según la estructura de tus objetos */}
           </div>
         ))
