@@ -28,8 +28,12 @@ export async function registerNewUser(user){
     const docRef = doc(collectionRef , user.uid)
     await setDoc(docRef , user);
 
-
+   
   }catch(error){
  console.log("error en firebase register" , error)
   }
+}
+
+export async function addNewLink  (){
+
 }
