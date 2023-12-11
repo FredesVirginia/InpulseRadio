@@ -62,7 +62,7 @@ export default function StationDetail (){
     return (
         <div className="pt-10"  
         style={{
-          backgroundImage: 'url("./Img/playa.jpg")',
+          backgroundImage: 'url("./Img/playa3.jpg")',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center center',
           backgroundAttachment: 'fixed',
