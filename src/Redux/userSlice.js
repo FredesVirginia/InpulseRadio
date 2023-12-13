@@ -27,7 +27,7 @@ const initialState = loadState() || {
   email: "",
   password: "",
   valueLogin: false,
-  idUserLogin : 0,
+  idUserLogin : "",
 };
 
 export const userSliceRegister = createSlice({
@@ -42,17 +42,22 @@ export const userSliceRegister = createSlice({
       saveState(state);
     },
 
-    loginUser: (state, action) => {
+   
+    loginUser2 : (state , action)=>{
      
-      const { value, id } = action.payload;
-      state.idUserLogin = id;
-      state.valueLogin = value;
-      saveState(state);
+     state.valueLogin= action.payload;
+     saveState(state);
     },
+
+    userLoggeado : (state , action) =>{
+      console.log("EL action en userLoggeado" , action.payload)
+      state.idUserLogin = action.payload;
+      saveState(state);
+    }
   },
 });
 
-export const { registerUser, loginUser } = userSliceRegister.actions;
+export const { registerUser,  loginUser2 , userLoggeado} = userSliceRegister.actions;
 
 export default userSliceRegister.reducer;
 

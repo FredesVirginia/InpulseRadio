@@ -4,7 +4,7 @@ import { FaRadio } from 'react-icons/fa6';
 import { useDispatch } from 'react-redux';
 
 import { useSelector } from 'react-redux';
-import {loginUser } from '../../Redux/userSlice';
+import {loginUser2 , userLoggeado } from '../../Redux/userSlice';
 import toast from 'react-hot-toast';
 import { v4 as uuidv4} from  "uuid"
 import {auth} from "../../firebase"
@@ -39,9 +39,10 @@ export default function Login ( ){
         try {
            const response =  await  signInWithEmailAndPassword(auth, email, password);
            console.log("Lo que viene de RESPONSE LOGIN ES " , response.user.uid)
-           await dispatch(loginUser({
-            value: true,
-            id: response.user.uid}));
+          console.log("EL response COMPLETO ES " , response)
+            await dispatch (userLoggeado(response.user.uid))
+            await dispatch(loginUser2(true));
+
             toast.promise(
                 Promise.resolve('Login  Correcto'), // Resuelve la promesa cuando la notificación se cierra
                 {
@@ -54,7 +55,7 @@ export default function Login ( ){
               );
         
         }catch(error){
-
+            console.log("El error en login fue" , error)
         }
           
       };

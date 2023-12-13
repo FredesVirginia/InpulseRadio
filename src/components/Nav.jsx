@@ -3,29 +3,23 @@ import {signOut } from "firebase/auth";
 import toast from "react-hot-toast";
 import Link from "next/link";
 import {auth} from "@/firebase"
-import { loginUser } from "@/Redux/userSlice";
+import { loginUser2 } from "@/Redux/userSlice";
 import { useDispatch } from "react-redux";
-
+import { useRouter } from 'next/navigation';
 export default function Nav (){
+  const router = useRouter();
   const dispatch = useDispatch();
     const handleSignOut = async () => {
         try {
           await signOut(auth);
           console.log('Usuario cerró sesión exitosamente.');
-          await dispatch(loginUser(false));
-          toast.promise(
-            Promise.resolve('Cerraste Sesión!'),
-            {
-              loading: 'Cargando...',
-              success: (resolved) => {
-                // Verificar si se está ejecutando en el lado del cliente antes de redirigir
-                if (typeof window !== "undefined") {
-                  router.push('/login');
-                }
-                return resolved;
-              },
-            }
-          );
+          const user = {
+            id : "o", 
+            value: false
+          }
+         await dispatch(loginUser2(false));
+          router.push("/login");
+          toast("Cerrando secion ")
         } catch (error) {
           console.error('Error al cerrar sesión:', error.message);
         }

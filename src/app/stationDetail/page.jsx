@@ -11,24 +11,15 @@ import { FaCirclePause } from "react-icons/fa6";
 import { recoverRadio } from "@/helpers/recoverRadio";
 import { MdFavorite } from "react-icons/md";                                                                               
 import { v4 as uuidv4} from  "uuid"
+import { addNewLink } from "@/firebase";
 
 export default function StationDetail (){
+  const valueLogin = useSelector((state) => state.userRegister.idUserLogin);
   const [localData, setLocalData] = useState([]);
   const [audioRef, setAudioRef] = useState(null);
-  const  [favorito , setFavorito] = useState({
-    id : uuidv4(),
-    name : "",
-    country : "",
-    votes: 0,
-    url: ""
-  });
+ 
 
-  const [ station , setStation] = useState({
-    name : "",
-    country : "",
-    votes: 0,
-    url: ""
-  });
+ 
   const stationName = useSelector((state) => state.stationReducer.nameStation);
   console.log("El REDUCER EN EL STATIONDEDAITL  ES ", stationName);
 
@@ -72,20 +63,31 @@ export default function StationDetail (){
     }
   };
 
-  const addFavorito = (station) =>{
+  const addFavorito = async (station) =>{
       console.log("Hiciste click");
       console.log("La radion es " , station);
-      setFavorito({
+      const favorito ={
+        uuid : valueLogin,
         name: station.name,
         country : station.country,
         votes : station.votes,
         url : station.url
-      });
+      };
 
+      try{
+       
+        console.log("El objeto que se envia a FIREBA SES " , favorito)
 
+     const res= await addNewLink(favorito);
+      favorito.docId = res.id;
+      console.log("AL PARECER SALIO BIEN ")
+      }catch(error){
+        console.log("Hubo en error en componnete addLink" , error)
+      }
+      
   }
 
-  console.log("El favorito es " , favorito);
+ 
 
   console.log("El stado local de stations es " , localData.length)
     return (

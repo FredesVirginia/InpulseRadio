@@ -34,6 +34,14 @@ export async function registerNewUser(user){
   }
 }
 
-export async function addNewLink  (){
+export async function addNewLink  (favorito){
+  console.log("El  FAVORITO que llega a firebase INSERTnewLin es :" , favorito);
+  try{
+     const docRef = collection(db , "favoritos");
+     const res = await addDoc(docRef , favorito);
+     return res;
+  }catch(error){
+     console.error(error);
 
+  }
 }

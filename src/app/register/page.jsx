@@ -17,7 +17,7 @@ export default function Register() {
   const router = useRouter();
 
   const [user, setUser] = useState({
-    uid:uuidv4(),
+    uid:"",
     name: '',
     email: '',
     password: '',

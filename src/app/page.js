@@ -7,14 +7,15 @@ import toast from "react-hot-toast";
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
-import {loginUser } from '../Redux/userSlice';
+import {loginUser2 } from '../Redux/userSlice';
 import Main from "@/components/Main"
 import Nav from "@/components/Nav"
   
 export default function  Home () {
   const dispatch = useDispatch();
   const router = useRouter();
-  const valueLogin = useSelector((state) => state.userRegister.valueLogin);
+  const valueLogin = useSelector((state) => state.userRegister.idUserLogin);
+  console.log("El user ID logueado es " , valueLogin);
   console.log("El REDUCER ES ", valueLogin);
   const [currentPage, setCurrentPage] = useState(1);
   const divsPerPage = 6; // 2 filas x 3 columnas
@@ -36,20 +37,13 @@ export default function  Home () {
     try {
       await signOut(auth);
       console.log('Usuario cerró sesión exitosamente.');
-      await dispatch(loginUser(false));
-      toast.promise(
-        Promise.resolve('Cerraste Sesión!'),
-        {
-          loading: 'Cargando...',
-          success: (resolved) => {
-            // Verificar si se está ejecutando en el lado del cliente antes de redirigir
-            if (typeof window !== "undefined") {
-              router.push('/login');
-            }
-            return resolved;
-          },
-        }
-      );
+     
+      await dispatch(loginUser2(false));
+   
+      router.push('/login');
+      toast("SE CERRO SECCION")
+      console.log("1");
+      
     } catch (error) {
       console.error('Error al cerrar sesión:', error.message);
     }
@@ -59,7 +53,7 @@ export default function  Home () {
     // Cargar el estado almacenado en localStorage
     const storedState = JSON.parse(localStorage.getItem('userRegister'));
     if (storedState) {
-      dispatch(loginUser(storedState.valueLogin));
+      dispatch(loginUser2(storedState.valueLogin));
     }
   }, [dispatch]);
 
