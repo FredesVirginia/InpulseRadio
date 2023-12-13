@@ -13,6 +13,7 @@ import { getAuth , signInWithEmailAndPassword} from "firebase/auth";
 import { useRouter } from 'next/navigation';
 
 export default function Login ( ){
+  const valueLogin = useSelector((state) => state.userRegister.idUser);
     const router = useRouter();
     const dispatch = useDispatch();
 
@@ -38,9 +39,9 @@ export default function Login ( ){
      
         try {
            const response =  await  signInWithEmailAndPassword(auth, email, password);
-           console.log("Lo que viene de RESPONSE LOGIN ES " , response.user.uid)
-          console.log("EL response COMPLETO ES " , response)
-            await dispatch (userLoggeado(response.user.uid))
+           console.log("Lo que viene de RESPONSE LOGIN ES " , valueLogin)
+          console.log("EL response COMPLETO ES " , valueLogin)
+            await dispatch (userLoggeado(valueLogin))
             await dispatch(loginUser2(true));
 
             toast.promise(

@@ -25,8 +25,8 @@ export async function registerNewUser(user){
   console.log("EL user de registro en firebase register " , user)
   try {
     const collectionRef = collection(db , "users");
-    const docRef = doc(collectionRef , user.uid)
-    await setDoc(docRef , user);
+    const docRef = await addDoc(collectionRef , user)
+   return docRef
 
    
   }catch(error){
@@ -43,5 +43,33 @@ export async function addNewLink  (favorito){
   }catch(error){
      console.error(error);
 
+  }
+}
+
+export async function getLinks(TTTuuid) {
+  if (typeof TTTuuid !== 'string' && typeof TTTuuid !== 'number') {
+    throw new Error('El UID debe ser una cadena o un número.');
+  }
+
+  // Convierte el UID a una cadena si es un número
+  const uidString = typeof TTTuuid === 'number' ? TTTuuid.toString() : TTTuuid;
+
+  const favoritos = [];
+
+  try {
+    const collectionRef = collection(db, "favoritos");
+    const q = query(collectionRef, where('uuid', '==', uidString));
+    const querySnapshot = await getDocs(q);
+
+    querySnapshot.forEach(doc => {
+      const linkData = doc.data();
+      const link = { docId: doc.id, ...linkData };
+      favoritos.push(link);
+    });
+    console.log("LOS FAROTISO EN FIREBASE ESON " , favoritos)
+    return favoritos;
+  } catch (error) {
+    console.error(error);
+    throw error;
   }
 }

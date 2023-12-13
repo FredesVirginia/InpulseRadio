@@ -23,6 +23,7 @@ const saveState = (state) => {
 };
 
 const initialState = loadState() || {
+  idUser:"",
   name: "",
   email: "",
   password: "",
@@ -35,7 +36,8 @@ export const userSliceRegister = createSlice({
   initialState,
   reducers: {
     registerUser: (state, action) => {
-      const { name, email, password } = action.payload;
+      const { TTTuid , name, email, password } = action.payload;
+      state.idUser= TTTuid,
       state.name = name;
       state.email = email;
       state.password = password;

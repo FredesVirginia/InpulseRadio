@@ -29,7 +29,7 @@ export default function Nav (){
             <h1 className="text-red-400 font-bold text-4xl">100`5</h1>
              <span className="text-white font-bold">RADIO</span>
              <div className=" flex justify-end space-x-6">
-             <Link className='  text-white font-bold text-2xl ' href="/">FAVORITOS</Link>
+             <Link className='  text-white font-bold text-2xl ' href="/favoritos">FAVORITOS</Link>
             <button 
                 className="text-2xl  text-white font-bold"
                 onClick={handleSignOut}

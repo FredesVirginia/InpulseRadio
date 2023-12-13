@@ -17,21 +17,13 @@ export default function Register() {
   const router = useRouter();
 
   const [user, setUser] = useState({
-    uid:"",
+    TTTuid:uuidv4(),
     name: '',
     email: '',
     password: '',
   });
 
-  const registro = async (e)=>{
-    try{
-        await registerNewUser(user)
-           
-     
-    }catch(error){
-        console.log(error)
-    }
-  }
+  
 
   const setDataHandler = (e) => {
     setUser({
@@ -49,6 +41,7 @@ export default function Register() {
 
     try {
       console.log('El user es en register', user);
+      await registerNewUser(user)
       await dispatch(registerUser(user));
      const res = await createUserWithEmailAndPassword(auth, user.email, user.password);
       await registerNewUser(user);
