@@ -2,9 +2,12 @@
 import {signOut } from "firebase/auth";
 import toast from "react-hot-toast";
 import Link from "next/link";
-
+import {auth} from "@/firebase"
+import { loginUser } from "@/Redux/userSlice";
+import { useDispatch } from "react-redux";
 
 export default function Nav (){
+  const dispatch = useDispatch();
     const handleSignOut = async () => {
         try {
           await signOut(auth);

@@ -37,8 +37,11 @@ export default function Login ( ){
         e.preventDefault();
      
         try {
-            await  signInWithEmailAndPassword(auth, email, password);
-           await dispatch(loginUser(true));
+           const response =  await  signInWithEmailAndPassword(auth, email, password);
+           console.log("Lo que viene de RESPONSE LOGIN ES " , response.user.uid)
+           await dispatch(loginUser({
+            value: true,
+            id: response.user.uid}));
             toast.promise(
                 Promise.resolve('Login  Correcto'), // Resuelve la promesa cuando la notificación se cierra
                 {

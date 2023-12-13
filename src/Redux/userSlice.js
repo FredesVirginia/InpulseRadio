@@ -27,6 +27,7 @@ const initialState = loadState() || {
   email: "",
   password: "",
   valueLogin: false,
+  idUserLogin : 0,
 };
 
 export const userSliceRegister = createSlice({
@@ -42,7 +43,9 @@ export const userSliceRegister = createSlice({
     },
 
     loginUser: (state, action) => {
-      const value = action.payload;
+     
+      const { value, id } = action.payload;
+      state.idUserLogin = id;
       state.valueLogin = value;
       saveState(state);
     },
