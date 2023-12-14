@@ -1,7 +1,7 @@
 "use client"
 
 import Nav from "@/components/Nav";
-
+import "@/styles/style.css";
 import Link from "next/link";
 import {getLinks} from "@/firebase";
 import { useSelector } from "react-redux";
@@ -73,7 +73,9 @@ export default function Favoritos (){
           
             <div >
             {loading ? (
-            <p className="text-center font-bold text-white text-2xl">Cargando...</p>
+           <div className=" pt-10 pl-40 flex justify-center">
+            <div className="  lds-ripple"><div></div><div></div></div>
+           </div>
           ) : arrayFavorito.length === 0 ? (
             <p className="text-center font-bold text-white text-2xl">Aún no tienes favoritos.</p>
           ) : (

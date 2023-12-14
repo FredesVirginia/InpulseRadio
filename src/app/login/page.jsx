@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { FaRadio } from 'react-icons/fa6';
 import { useDispatch } from 'react-redux';
-
+import "@/styles/style.css";
 import { useSelector } from 'react-redux';
 import {loginUser2 , userLoggeado } from '../../Redux/userSlice';
 import toast from 'react-hot-toast';
@@ -14,6 +14,7 @@ import { useRouter } from 'next/navigation';
 
 export default function Login ( ){
   const valueLogin = useSelector((state) => state.userRegister.idUser);
+  const [loading, setLoading] = useState(false);
     const router = useRouter();
     const dispatch = useDispatch();
 
@@ -43,7 +44,7 @@ export default function Login ( ){
           console.log("EL response COMPLETO ES " , valueLogin)
             await dispatch (userLoggeado(valueLogin))
             await dispatch(loginUser2(true));
-
+            setLoading(true); 
             toast.promise(
                 Promise.resolve('Login  Correcto'), // Resuelve la promesa cuando la notificación se cierra
                 {
@@ -104,6 +105,11 @@ export default function Login ( ){
         />
         <button className="bg-color6 py-1 text-white rounded shadow">Login</button>
       </form>
+      {loading && (
+        <div className="pt-10 pl-40 flex justify-center">
+          <div className="lds-ripple"><div></div><div></div></div>
+        </div>
+      )}
     </div>
     )
 }
