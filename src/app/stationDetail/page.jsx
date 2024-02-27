@@ -1,18 +1,18 @@
 "use client"
  import { useEffect , useState} from "react";
-import StationDetailC from "@/components/StationDetailC";
-import { useRouter } from 'next/navigation';
+
+
 import Nav from "@/components/Nav";
 import Link from "next/link";
-import { useParams } from 'react-router-dom';
+
 import { useSelector } from 'react-redux';
 import { FaPlayCircle } from "react-icons/fa";
 import { FaCirclePause } from "react-icons/fa6";
 import { recoverRadio } from "@/helpers/recoverRadio";
 import { MdFavorite } from "react-icons/md";                                                                               
-import { v4 as uuidv4} from  "uuid"
-import { addNewLink } from "@/firebase";
 
+import { addNewLink } from "@/firebase";
+import toast from 'react-hot-toast';
 export default function StationDetail (){
   const valueLogin = useSelector((state) => state.userRegister.idUserLogin);
   const [localData, setLocalData] = useState([]);
@@ -80,7 +80,8 @@ export default function StationDetail (){
 
      const res= await addNewLink(favorito);
       favorito.docId = res.id;
-      console.log("AL PARECER SALIO BIEN ")
+      console.log("AL PARECER SALIO BIEN ");
+      toast.success("Se agrego a Favoritos");
       }catch(error){
         console.log("Hubo en error en componnete addLink" , error)
       }

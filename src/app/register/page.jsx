@@ -59,6 +59,7 @@ export default function Register() {
       );
 
     } catch (error) {
+      toast.error('Ocurrió un error. Inténtalo de nuevo.');
       console.error('Error en onSubmit de register', error);
     }
   };

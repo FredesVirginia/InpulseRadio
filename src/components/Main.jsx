@@ -46,7 +46,7 @@ export default function  Main ({ handleSignOut, currentPage, divsPerPage, totalP
         <div className="grid grid-cols-3 grid-rows-2 gap-4 p-4">
           {/* Muestra los divs actuales según la página actual */}
           {currentDivsData.map((div) => (
-            <div className="bg-gray-200 m-2 w-56 h-76" key={div.id}>
+            <div className="bg-gray-200 m-2 w-[200] h-76" key={div.id}>
              
               {/* Aquí puedes agregar la imagen u otro contenido según tus necesidades */}
               <Image
@@ -62,13 +62,9 @@ export default function  Main ({ handleSignOut, currentPage, divsPerPage, totalP
                <div className="text-center p-2 bg-sky-600">
              
             
-               <Link
-                      href={`/stationDetail`}
-                      onClick={() => handleClik(div.link)}
-                    >
-                      Listen
-                    </Link>
-
+               
+              <a   href= {`/stationDetail`}
+                      onClick={() => handleClik(div.link)}> Listen </a>
            
                </div>
             </div>

@@ -81,9 +81,9 @@ export default function Favoritos (){
           ) : (
             
                 <div className="flex justify-center">
-                <div className="grid grid-cols-2  gap-4 p-4">
+                <div className="grid grid-cols-2  gap-4 p-4 ">
                 {arrayFavorito.map((item, index) => (
-                 <div key={index} className=" text-white relative flex flex-col w-[300px] h-[200px] space-y-12 p-12 bg-gradient-to-b from-color9 to-color10 m-10">
+                 <div key={index} className=" text-white relative flex flex-col w-[350px] h-[400px] space-y-12 px-16 p-12 bg-gradient-to-b from-color9 to-color10 m-10">
            
                  <p className="text-2xl   font-extrabold  truncate">  {cleanName(item.name)}  </p>
                  
@@ -91,7 +91,7 @@ export default function Favoritos (){
                   <div className="absolute bottom-0 pb-10 space-y-2 text-white ">
                    
                   <p className="font-bold">VOTES : {item.votes}</p>
-                       <p className="truncate font-bold">  {item.country}</p>
+                       <p className="mt-4 truncate font-bold">  {item.country}</p>
                        <div className="flex space-x-8  w-[250px] "> 
                        <p>  <Link  className="underline font-bold" href={item.url}> Fan Page </Link> </p>
                                                                                                
